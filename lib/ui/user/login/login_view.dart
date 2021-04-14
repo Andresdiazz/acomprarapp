@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:apple_sign_in/apple_sign_in_button.dart';
+import 'package:apple_sign_in/apple_sign_in_button.dart' as apple;
 import 'package:fluttermultistoreflutter/api/common/ps_resource.dart';
 import 'package:fluttermultistoreflutter/config/ps_colors.dart';
 import 'package:fluttermultistoreflutter/config/ps_config.dart';
@@ -735,12 +735,16 @@ class _LoginWithAppleIdWidget extends StatelessWidget {
             left: PsDimens.space32,
             top: PsDimens.space8,
             right: PsDimens.space32),
-        child: AppleSignInButton(
-          //style: ButtonStyle.black, // style as needed
-          type: ButtonType.signIn, // style as needed
+        child: apple.AppleSignInButton(
+          // style as needed
+          style: apple.ButtonStyle.black,
+          type: apple.ButtonType.signIn, // style as needed
           onPressed: () async {
-            await _userProvider.loginWithAppleId(
-                context, onAppleIdSignInSelected);
+            await _userProvider
+                .loginWithAppleId(context, onAppleIdSignInSelected)
+                .then((value) {
+              Navigator.pop(context);
+            });
           },
         ));
   }

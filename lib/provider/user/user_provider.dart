@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -365,7 +366,6 @@ class UserProvider extends PsProvider {
 
   Future<FirebaseUser> _getFirebaseUserWithAppleId() async {
     final List<Scope> scopes = <Scope>[Scope.email, Scope.fullName];
-
     // 1. perform the sign-in request
     final AuthorizationResult result = await AppleSignIn.performRequests(
         <AppleIdRequest>[AppleIdRequest(requestedScopes: scopes)]);
